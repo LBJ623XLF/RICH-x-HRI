@@ -1,1 +1,1 @@
-# RICH-x-HRI
+# RICH x HRI
