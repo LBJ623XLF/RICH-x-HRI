@@ -1,9 +1,9 @@
 # RICH x HRI
 
-# HARD
+HARD
 
-# SOFT
+SOFT
 
-# PRE
+PRE
 
-# APP
+APP
