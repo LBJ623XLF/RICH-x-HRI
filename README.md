@@ -37,4 +37,10 @@ sudo apt install curl
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 ```
 
+### 1.3 Install
+
+```bash
+sudo apt update
+sudo apt install ros-noetic-desktop-full
+```
 
