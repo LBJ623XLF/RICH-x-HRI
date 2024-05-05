@@ -1,8 +1,5 @@
 # RICH HRC
 
-## Description
-Provide a brief description of your project here, explaining what it does and its purpose.
-
 ## Hardware Requirements
 
 ### Robot
@@ -23,13 +20,8 @@ Provide a brief description of your project here, explaining what it does and it
 - **Realsense SDK**
 
 ## Installation
-Provide step-by-step instructions on how to set up the project:
 
-1. **Install ROS**
-   ```bash
-   # Download and install Ubuntu 18.04 from the official website.
-
-## 1. Installation
+## 1. ROS
 
 ### 1.1 Configure your Ubuntu Repositories
 
@@ -43,7 +35,3 @@ To add the ROS repository to your system, execute the following command:
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
 
-
-1. **Install Ubuntu:**
-   ```bash
-   # Download and install Ubuntu 18.04 from the official website.
