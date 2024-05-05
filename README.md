@@ -29,10 +29,6 @@ Provide step-by-step instructions on how to set up the project:
    ```bash
    # Download and install Ubuntu 18.04 from the official website.
 
-# ROS Installation Guide for Ubuntu
-
-This README provides detailed instructions for installing ROS (Robot Operating System) on Ubuntu. Follow these steps to configure your system and get started with ROS.
-
 ## 1. Installation
 
 ### 1.1 Configure your Ubuntu Repositories
