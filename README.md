@@ -14,7 +14,7 @@ Provide a brief description of your project here, explaining what it does and it
 ## Software Requirements
 
 ### Operating System
-- **Ubuntu:** 18.04
+- **Ubuntu:** 20.04
 
 ### Robotics Middleware
 - **ROS1:** Noetic
