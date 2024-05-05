@@ -100,7 +100,7 @@ $ source devel/setup.bash
 
 ### 2.3 Setup
 
-externalcontrol-x.x.x.urcap` on your UR robot
+**externalcontrol-x.x.x.urcap** on your UR robot
 
 ```bash
 roslaunch ur_robot_driver <robot_type>_bringup.launch robot_ip:=192.168.56.101
