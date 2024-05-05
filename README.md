@@ -111,19 +111,62 @@ roslaunch ur_robot_driver <robot_type>_bringup.launch robot_ip:=192.168.56.101
 ### 3.1 Install
 
 ```bash
+#install moveit
+
 sudo apt install ros-noetic-moveit
+
+#install ROS
+
 rosdep update
 sudo apt update
 sudo apt dist-upgrade
+
+#install catkin
+
 sudo apt install ros-noetic-catkin python3-catkin-tools
+
+#install wstool
+
+sudo apt install python3-wstool
 ```
 
 
 ### 3.2 WS
 
 ```bash
+
+# source global ros
+$ source /opt/ros/<your_ros_version>/setup.bash
+
+# create a catkin workspace
+$ mkdir -p catkin_ws/src && cd catkin_ws
+
+# clone the driver
+$ git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git src/Universal_Robots_ROS_Driver
+
+# clone the description. Currently, it is necessary to use the melodic-devel branch.
+$ git clone -b melodic-devel https://github.com/ros-industrial/universal_robot.git src/universal_robot
+
+# install dependencies
+$ sudo apt update -qq
+$ rosdep update
+$ rosdep install --from-paths src --ignore-src -y
+
+# build the workspace
+$ catkin_make
+
+# activate the workspace (ie: source it)
+$ source devel/setup.bash
+
 mkdir -p ~/ws_moveit/src
 cd ~/ws_moveit/src
+wstool init .
+wstool merge -t . https://raw.githubusercontent.com/ros-planning/moveit/master/moveit.rosinstall
+wstool remove moveit_tutorials  # this is cloned in the next section
+wstool update -t .
+cd ~/ws_moveit/src
+git clone https://github.com/ros-planning/moveit_tutorials.git -b master
+git clone https://github.com/ros-planning/panda_moveit_config.git -b noetic-devel
 ```
 
 ### 2.3 Setup
