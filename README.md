@@ -98,27 +98,4 @@ $ catkin_make
 $ source devel/setup.bash
 ```
 
-### 1.3 Install
 
-```bash
-sudo apt update
-sudo apt install ros-noetic-desktop-full
-sudo apt install ros-noetic-PACKAGE
-```
-
-### 1.4 Env
-
-```bash
-source /opt/ros/noetic/setup.bash
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-```
-
-### 1.5 Dep
-
-```bash
-sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
-sudo apt install python3-rosdep
-rosdep init
-rosdep update
-```
