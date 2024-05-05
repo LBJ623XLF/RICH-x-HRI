@@ -1,10 +1,11 @@
 # RICH x HRI
 
-HARD \\
+HARD
 Robot: UR5e
 Cam: Realsense D435
 
 SOFT
+Ubuntu: 20.04
 
 PRE
 
