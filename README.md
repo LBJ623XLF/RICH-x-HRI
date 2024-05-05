@@ -221,12 +221,29 @@ cmake ../ -DBUILD_EXAMPLES=true
 sudo make uninstall && make clean && make && sudo make install
 ```
 
-### 4.3 Install
+### 4.3 RS
 
 ```bash
-sudo apt update
-sudo apt install ros-noetic-desktop-full
-sudo apt install ros-noetic-PACKAGE
+#ws
+
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src/
+
+git clone https://github.com/IntelRealSense/realsense-ros.git
+cd realsense-ros/
+git checkout `git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1`
+cd ..
+
+#build
+
+catkin_init_workspace
+cd ..
+catkin_make clean
+catkin_make -DCATKIN_ENABLE_TESTING=False -DCMAKE_BUILD_TYPE=Release
+catkin_make install
+
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+source ~/.bashrc
 ```
 
 ### 4.4 Env
