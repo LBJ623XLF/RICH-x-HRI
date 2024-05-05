@@ -42,5 +42,14 @@ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo ap
 ```bash
 sudo apt update
 sudo apt install ros-noetic-desktop-full
+sudo apt install ros-noetic-PACKAGE
+```
+
+### 1.4 Env
+
+```bash
+source /opt/ros/noetic/setup.bash
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
 ```
 
