@@ -106,4 +106,46 @@ $ source devel/setup.bash
 roslaunch ur_robot_driver <robot_type>_bringup.launch robot_ip:=192.168.56.101
 ```
 
+## 3. Moveit
 
+### 2.1 Install
+
+```bash
+sudo apt install ros-noetic-moveit
+```
+
+
+### 2.2 Build
+
+```bash
+# source global ros
+$ source /opt/ros/<your_ros_version>/setup.bash
+
+# create a catkin workspace
+$ mkdir -p catkin_ws/src && cd catkin_ws
+
+# clone the driver
+$ git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git src/Universal_Robots_ROS_Driver
+
+# clone the description. Currently, it is necessary to use the melodic-devel branch.
+$ git clone -b melodic-devel https://github.com/ros-industrial/universal_robot.git src/universal_robot
+
+# install dependencies
+$ sudo apt update -qq
+$ rosdep update
+$ rosdep install --from-paths src --ignore-src -y
+
+# build the workspace
+$ catkin_make
+
+# activate the workspace (ie: source it)
+$ source devel/setup.bash
+```
+
+### 2.3 Setup
+
+**externalcontrol-x.x.x.urcap** on your UR robot
+
+```bash
+roslaunch ur_robot_driver <robot_type>_bringup.launch robot_ip:=192.168.56.101
+```
