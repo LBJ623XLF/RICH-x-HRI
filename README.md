@@ -1,15 +1,4 @@
-# RICH x HRI
-
-HARD
-Robot: UR5e
-Cam: Realsense D435
-
-SOFT
-Ubuntu: 18.04
-Ros1 neotic
-Realsense
-
-# Project Title
+# RICH HRC
 
 ## Description
 Provide a brief description of your project here, explaining what it does and its purpose.
