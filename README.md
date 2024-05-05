@@ -195,7 +195,6 @@ ssudo apt-get install ros-$ROS_DISTRO-realsense2-camera
 
 ```bash
 #dependency
-
 sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
 
 sudo apt-get install libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
@@ -205,13 +204,11 @@ sudo apt-get install git wget cmake build-essential
 sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at
 
 #librealsense2
-
 git clone https://github.com/IntelRealSense/librealsense.git
 
 ./scripts/setup_udev_rules.sh
 
 #build
-
 mkdir build && cd build
 
 cmake ../
@@ -225,7 +222,6 @@ sudo make uninstall && make clean && make && sudo make install
 
 ```bash
 #ws
-
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src/
 
@@ -235,7 +231,6 @@ git checkout `git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1`
 cd ..
 
 #build
-
 catkin_init_workspace
 cd ..
 catkin_make clean
