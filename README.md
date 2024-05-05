@@ -97,5 +97,31 @@ $ catkin_make
 # activate the workspace (ie: source it)
 $ source devel/setup.bash
 ```
+# Setting up a UR Robot for `ur_robot_driver`
+
+## Prepare the Robot
+
+1. **Install the External Control URCap:**
+   Install the `externalcontrol-x.x.x.urcap` on your UR robot. You can find the URCap and installation instructions [here](URL-to-externalcontrol).
+
+2. **URCap and Program Setup:**
+   For instructions on creating a program with URCap and setting up specific models like e-Series robots, refer to the individual tutorials:
+   - [Setup a CB3 robot](URL-to-CB3-setup)
+   - [Setup an e-Series robot](URL-to-e-Series-setup)
+   - For setting up tool communication on e-Series robots, see the [tool communication setup guide](URL-to-tool-communication-setup).
+
+## Prepare the ROS PC
+
+Ensure that the `ur_robot_driver` is installed on your ROS PC. This can be done either by installing the Debian package or by building from source inside a catkin workspace.
+
+## Extract Calibration Information
+
+To utilize the factory calibration for precise control:
+
+1. **Extract Calibration:**
+   Even though not strictly necessary, extracting calibration data from your robot is recommended to avoid end-effector positional errors. Use the following script to extract this information:
+   ```bash
+   roslaunch ur_calibration calibration_correction.launch \
+     robot_ip:=<robot_ip> target_filename:="${HOME}/my_robot_calibration.yaml"
 
 
