@@ -180,6 +180,68 @@ roslaunch panda_moveit_config demo.launch
 rosrun moveit_tutorials move_group_python_interface_tutorial.py
 
 roslaunch moveit_tutorials move_group_interface_tutorial.launch
-
 ```
 
+## 4. ROS
+
+### 4.1 Dis
+
+```bash
+ssudo apt-get install ros-$ROS_DISTRO-realsense2-camera
+```
+
+
+### 4.2 SDK
+
+```bash
+#dependency
+
+sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
+
+sudo apt-get install libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
+
+sudo apt-get install git wget cmake build-essential
+
+sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at
+
+#librealsense2
+
+git clone https://github.com/IntelRealSense/librealsense.git
+
+./scripts/setup_udev_rules.sh
+
+#build
+
+mkdir build && cd build
+
+cmake ../
+
+cmake ../ -DBUILD_EXAMPLES=true
+
+sudo make uninstall && make clean && make && sudo make install
+```
+
+### 4.3 Install
+
+```bash
+sudo apt update
+sudo apt install ros-noetic-desktop-full
+sudo apt install ros-noetic-PACKAGE
+```
+
+### 4.4 Env
+
+```bash
+source /opt/ros/noetic/setup.bash
+echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### 4.5 Dep
+
+```bash
+sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+sudo apt install python3-rosdep
+rosdep init
+rosdep update
+```
