@@ -182,7 +182,7 @@ rosrun moveit_tutorials move_group_python_interface_tutorial.py
 roslaunch moveit_tutorials move_group_interface_tutorial.launch
 ```
 
-## 4. ROS
+## 4. RS
 
 ### 4.1 Dis
 
@@ -246,19 +246,12 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### 4.4 Env
+### 4.4 Launch
 
 ```bash
-source /opt/ros/noetic/setup.bash
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
+roslaunch realsense2_camera rs_camera.launch
+
+roslaunch realsense2_camera rs_camera.launch filters:=pointcloud
 ```
 
-### 4.5 Dep
 
-```bash
-sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
-sudo apt install python3-rosdep
-rosdep init
-rosdep update
-```
