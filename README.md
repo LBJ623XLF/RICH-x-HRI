@@ -1,6 +1,6 @@
 # RICH x HRI
 
-HARD
+HARD \\
 Robot: UR5e
 Cam: Realsense D435
 
