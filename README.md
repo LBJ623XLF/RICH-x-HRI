@@ -169,6 +169,17 @@ echo 'source ~/ws_moveit/devel/setup.bash' >> ~/.bashrc
 ### 3.3 Rivz
 
 ```bash
-roslaunch ur_robot_driver <robot_type>_bringup.launch robot_ip:=192.168.56.101
+roslaunch panda_moveit_config demo.launch rviz_tutorial:=true
+```
+
+### 3.4 Move
+
+```bash
+roslaunch panda_moveit_config demo.launch
+
+rosrun moveit_tutorials move_group_python_interface_tutorial.py
+
+roslaunch moveit_tutorials move_group_interface_tutorial.launch
+
 ```
 
