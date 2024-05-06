@@ -295,7 +295,7 @@ ros2 launch yolov8_bringup yolov8_3d.launch.py model:=yolov8m-pose.pt
 
 ## 6. Lidar
 
-### 3.1 Install
+### 6.1 Install
 
 ```bash
 git clone https://github.com/RoboSense-LiDAR/rslidar_sdk.git 
@@ -320,7 +320,7 @@ roslaunch rslidar_sdk start.launch
 ```
 
 
-### 3.2 Run
+### 6.2 Run
 
 ```bash
 roscore 
@@ -331,94 +331,62 @@ rosbag play filename.bag
 rviz 
 ```
 
-### 3.3 Rivz
+## 7. LIO-SAM
+
+### 7.1 Install
 
 ```bash
-roslaunch panda_moveit_config demo.launch rviz_tutorial:=true
+sudo apt-get install -y ros-noetic-navigation --allow-unauthenticated 
+sudo apt-get install -y ros-noetic-robot-localization 
+sudo apt-get install -y ros-noetic-robot-state-publisher 
+
+wget -0 ~/ros1_slam_3d_ws/gtsam.zip \ 
+https://github.com/borglab/gtsam/archive/4.0.2.zip  
+cd ~/ros1_slam_3d_ws/ && unzip gtsam.zip -d ~/ros1_slam_3d_ws/ 
+cd gtsam-4.0.2 
+mkdir build && cd build 
+cmake -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF \ 
+-DGTSAM_USE_SYSTEM_EIGEN=ON .. 
+sudo make install -j4 
+
+cd /usr/local/lib/ 
+sudo mv libmetis-gtsam.so /opt/ros/noetic/lib/ 
+
+cd ~/ros1_slam_3d_ws/src 
+git clone https://github.com/TixiaoShan/LIO-SAM.git 
+cd lio-sam 
+cd .. 
+catkin_make 
+
+cd ~/ros1_slam_3d_ws 
+gedit src/LIO-SAM/config/params.yaml 
+source devel/setup.bash 
+roscore 
+roslaunch lio_sam run.launch  
+rosbag play casual_walk.bag 
 ```
 
-### 3.4 Move
+### 7.2 Run
 
 ```bash
-roslaunch panda_moveit_config demo.launch
-
-rosrun moveit_tutorials move_group_python_interface_tutorial.py
-
-roslaunch moveit_tutorials move_group_interface_tutorial.launch
-```
-
-## 3. Moveit
-
-### 3.1 Install
-
-```bash
-#install moveit
-
-sudo apt install ros-noetic-moveit
-
-#install ROS
-
-rosdep update
-sudo apt update
-sudo apt dist-upgrade
-
-#install catkin
-
-sudo apt install ros-noetic-catkin python3-catkin-tools
-
-#install wstool
-
-sudo apt install python3-wstool
-```
+cd wit/wit_ros_ws 
+sudo chmod 777 /dev/ttyUSB0 
+source devel/setup.bash 
+roslaunch wit_ros_imu rviz_and_imu.launch 
 
 
-### 3.2 WS
+cd ~/rslidar_ws 
+source devel/setup.bash 
+roslaunch rslidar_sdk start.launch 
+rosbag record -O 701_v.bag /wit/imu /velodyne_points  
 
-```bash
+cd ~/catkin_ws 
+source devel/setup.bash 
+roslaunch lidar_imu_calib calib_exR_lidar2imu.launch 
 
-# create
-mkdir -p ~/ws_moveit/src
-cd ~/ws_moveit/src
+cd ~/ros1_slam_3d_ws 
+source devel/setup.bash 
+roslaunch lio_sam run.launch 
 
-# source
-wstool init .
-wstool merge -t . https://raw.githubusercontent.com/ros-planning/moveit/master/moveit.rosinstall
-wstool remove moveit_tutorials  # this is cloned in the next section
-wstool update -t .
-
-# code
-cd ~/ws_moveit/src
-git clone https://github.com/ros-planning/moveit_tutorials.git -b master
-git clone https://github.com/ros-planning/panda_moveit_config.git -b noetic-devel
-
-# build
-cd ~/ws_moveit/src
-rosdep install -y --from-paths . --ignore-src --rosdistro noetic
-
-sudo sh -c 'echo "deb http://packages.ros.org/ros-testing/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt update
-
-cd ~/ws_moveit
-catkin config --extend /opt/ros/${ROS_DISTRO} --cmake-args -DCMAKE_BUILD_TYPE=Release
-catkin build
-
-source ~/ws_moveit/devel/setup.bash
-
-echo 'source ~/ws_moveit/devel/setup.bash' >> ~/.bashrc
-```
-
-### 3.3 Rivz
-
-```bash
-roslaunch panda_moveit_config demo.launch rviz_tutorial:=true
-```
-
-### 3.4 Move
-
-```bash
-roslaunch panda_moveit_config demo.launch
-
-rosrun moveit_tutorials move_group_python_interface_tutorial.py
-
-roslaunch moveit_tutorials move_group_interface_tutorial.launch
+rosbag play 701_v.bag /imu/data:=/imu_raw /velodyne_points:=/points_raw 
 ```
