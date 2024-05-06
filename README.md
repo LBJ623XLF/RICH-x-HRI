@@ -260,9 +260,14 @@ cd ultralytics
 pip3 install -r requirements.txt
 ```
 
-
 ### 5.2 PyRS
 
 ```bash
-pip install pyrealsense2
+pip3 install pyrealsense2
+```
+
+### 5.3 CV
+
+```bash
+pip3 install opencv-python
 ```
