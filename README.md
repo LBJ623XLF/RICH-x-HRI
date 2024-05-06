@@ -104,6 +104,9 @@ source devel/setup.bash
 
 ```bash
 roslaunch ur_robot_driver <robot_type>_bringup.launch robot_ip:=192.168.56.101
+roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch
+roslaunch realsense2_camera rs_rgbd.launch
+roslaunch easy_handeye ur5_realsense_handeyecalibration.launch
 ```
 
 ## 3. Moveit
