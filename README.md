@@ -268,3 +268,27 @@ sudo apt install python3-pip
 pip3 install numpy opencv-python torch torchvision
 pip3 install pyrealsense2
 ```
+### 5.3 Yolo-ros
+
+```bash
+#ws
+cd ~/ros2_ws/src
+git clone https://github.com/mgonzs13/yolov8_ros.git
+pip3 install -r yolov8_ros/requirements.txt
+cd ~/ros2_ws
+rosdep install --from-paths src --ignore-src -r -y
+colcon build
+
+#launch
+ros2 launch yolov8_bringup yolov8.launch.py
+
+ros2 launch yolov8_bringup yolov8_3d.launch.py
+
+ros2 launch yolov8_bringup yolov8.launch.py model:=yolov8m-seg.pt
+
+ros2 launch yolov8_bringup yolov8.launch.py model:=yolov8m-pose.pt
+
+ros2 launch yolov8_bringup yolov8_3d.launch.py model:=yolov8m-seg.pt
+
+ros2 launch yolov8_bringup yolov8_3d.launch.py model:=yolov8m-pose.pt
+```
