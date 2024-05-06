@@ -260,14 +260,11 @@ cd ultralytics
 pip3 install -r requirements.txt
 ```
 
-### 5.2 PyRS
+### 5.2 Py
 
 ```bash
+sudo apt update
+sudo apt install python3-pip
+pip3 install numpy opencv-python torch torchvision
 pip3 install pyrealsense2
-```
-
-### 5.3 CV
-
-```bash
-pip3 install opencv-python
 ```
