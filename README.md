@@ -261,31 +261,10 @@ pip3 install -r requirements.txt
 ```
 
 
-### 4.2 SDK
+### 5.2 PyRS
 
 ```bash
-#dependency
-sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
-
-sudo apt-get install libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
-
-sudo apt-get install git wget cmake build-essential
-
-sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at
-
-#librealsense2
-git clone https://github.com/IntelRealSense/librealsense.git
-
-./scripts/setup_udev_rules.sh
-
-#build
-mkdir build && cd build
-
-cmake ../
-
-cmake ../ -DBUILD_EXAMPLES=true
-
-sudo make uninstall && make clean && make && sudo make install
+pip install pyrealsense2
 ```
 
 ### 4.3 RS
