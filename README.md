@@ -292,3 +292,133 @@ ros2 launch yolov8_bringup yolov8_3d.launch.py model:=yolov8m-seg.pt
 
 ros2 launch yolov8_bringup yolov8_3d.launch.py model:=yolov8m-pose.pt
 ```
+
+## 6. Lidar
+
+### 3.1 Install
+
+```bash
+git clone https://github.com/RoboSense-LiDAR/rslidar_sdk.git 
+cd rslidar_sdk 
+git submodule init 
+git submodule update
+
+
+sudo apt-get update 
+sudo apt-get install -y libyaml-cpp-dev
+
+sudo apt-get install -y  libpcap-dev
+
+cd rslidar_sdk 
+mkdir build && cd build 
+cmake .. && make -j4 
+./rslidar_sdk_node
+
+catkin_make 
+source devel/setup.bash 
+roslaunch rslidar_sdk start.launch
+```
+
+
+### 3.2 Run
+
+```bash
+roscore 
+rosbag record /topic  
+./rslidar_sdk_node 
+rviz 
+rosbag play filename.bag 
+rviz 
+```
+
+### 3.3 Rivz
+
+```bash
+roslaunch panda_moveit_config demo.launch rviz_tutorial:=true
+```
+
+### 3.4 Move
+
+```bash
+roslaunch panda_moveit_config demo.launch
+
+rosrun moveit_tutorials move_group_python_interface_tutorial.py
+
+roslaunch moveit_tutorials move_group_interface_tutorial.launch
+```
+
+## 3. Moveit
+
+### 3.1 Install
+
+```bash
+#install moveit
+
+sudo apt install ros-noetic-moveit
+
+#install ROS
+
+rosdep update
+sudo apt update
+sudo apt dist-upgrade
+
+#install catkin
+
+sudo apt install ros-noetic-catkin python3-catkin-tools
+
+#install wstool
+
+sudo apt install python3-wstool
+```
+
+
+### 3.2 WS
+
+```bash
+
+# create
+mkdir -p ~/ws_moveit/src
+cd ~/ws_moveit/src
+
+# source
+wstool init .
+wstool merge -t . https://raw.githubusercontent.com/ros-planning/moveit/master/moveit.rosinstall
+wstool remove moveit_tutorials  # this is cloned in the next section
+wstool update -t .
+
+# code
+cd ~/ws_moveit/src
+git clone https://github.com/ros-planning/moveit_tutorials.git -b master
+git clone https://github.com/ros-planning/panda_moveit_config.git -b noetic-devel
+
+# build
+cd ~/ws_moveit/src
+rosdep install -y --from-paths . --ignore-src --rosdistro noetic
+
+sudo sh -c 'echo "deb http://packages.ros.org/ros-testing/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt update
+
+cd ~/ws_moveit
+catkin config --extend /opt/ros/${ROS_DISTRO} --cmake-args -DCMAKE_BUILD_TYPE=Release
+catkin build
+
+source ~/ws_moveit/devel/setup.bash
+
+echo 'source ~/ws_moveit/devel/setup.bash' >> ~/.bashrc
+```
+
+### 3.3 Rivz
+
+```bash
+roslaunch panda_moveit_config demo.launch rviz_tutorial:=true
+```
+
+### 3.4 Move
+
+```bash
+roslaunch panda_moveit_config demo.launch
+
+rosrun moveit_tutorials move_group_python_interface_tutorial.py
+
+roslaunch moveit_tutorials move_group_interface_tutorial.launch
+```
