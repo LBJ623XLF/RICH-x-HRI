@@ -250,3 +250,72 @@ roslaunch realsense2_camera rs_camera.launch filters:=pointcloud
 ```
 
 
+## 5. YOLO
+
+### 5.1 v8
+
+```bash
+git clone https://github.com/ultralytics/ultralytics
+cd ultralytics
+pip3 install -r requirements.txt
+```
+
+
+### 4.2 SDK
+
+```bash
+#dependency
+sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
+
+sudo apt-get install libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
+
+sudo apt-get install git wget cmake build-essential
+
+sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at
+
+#librealsense2
+git clone https://github.com/IntelRealSense/librealsense.git
+
+./scripts/setup_udev_rules.sh
+
+#build
+mkdir build && cd build
+
+cmake ../
+
+cmake ../ -DBUILD_EXAMPLES=true
+
+sudo make uninstall && make clean && make && sudo make install
+```
+
+### 4.3 RS
+
+```bash
+#ws
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src/
+
+git clone https://github.com/IntelRealSense/realsense-ros.git
+cd realsense-ros/
+git checkout `git tag | sort -V | grep -P "^2.\d+\.\d+" | tail -1`
+cd ..
+
+#build
+catkin_init_workspace
+cd ..
+catkin_make clean
+catkin_make -DCATKIN_ENABLE_TESTING=False -DCMAKE_BUILD_TYPE=Release
+catkin_make install
+
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### 4.4 Launch
+
+```bash
+roslaunch realsense2_camera rs_camera.launch
+
+roslaunch realsense2_camera rs_camera.launch filters:=pointcloud
+```
+
