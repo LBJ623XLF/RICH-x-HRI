@@ -104,7 +104,10 @@ source devel/setup.bash
 
 ```bash
 roslaunch ur_robot_driver <robot_type>_bringup.launch robot_ip:=192.168.56.101
-roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch
+roslaunch ur_gazebo ur5_bringup.launch
+roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch sim:=true
+roslaunch ur5_moveit_config moveit_rviz.launch config:=true
+
 roslaunch realsense2_camera rs_rgbd.launch
 roslaunch easy_handeye ur5_realsense_handeyecalibration.launch
 ```
