@@ -190,7 +190,7 @@ roslaunch moveit_tutorials move_group_interface_tutorial.launch
 ### 4.1 Dis
 
 ```bash
-ssudo apt-get install ros-$ROS_DISTRO-realsense2-camera
+sudo apt-get install ros-$ROS_DISTRO-realsense2-camera
 ```
 
 
@@ -393,3 +393,44 @@ roslaunch lio_sam run.launch
 
 rosbag play 701_v.bag /imu/data:=/imu_raw /velodyne_points:=/points_raw 
 ```
+
+## 8. ViSP
+
+### 4.1 Dep
+
+```bash
+sudo apt-get install ros-humble-visp ros-humble-vision_visp
+
+sudo apt-get install libopencv-dev libx11-dev liblapack-dev libeigen3-dev libv4l-dev \
+                      libzbar-dev libpthread-stubs0-dev libdc1394-dev nlohmann-json3-dev
+```
+
+
+### 4.2 Install
+
+```bash
+#dependency
+$echo "export VISP_WS=$HOME/visp-ws" >> ~/.bashrc
+source ~/.bashrc
+mkdir -p $VISP_WS
+git clone https://github.com/lagadic/visp.git
+mkdir visp-build; cd visp-build
+cmake -DCMAKE_INSTALL_PREFIX=/opt/ros/$ROS_DISTRO ../visp
+make -j4; sudo make install
+
+mkdir -p $HOME/colcon_ws/src
+cd $HOME/colcon_ws/src
+source /opt/ros/<version>/setup.bash
+git clone https://github.com/lagadic/vision_visp.git -b rolling
+```
+
+### 4.3 Ros
+
+```bash
+cd $HOME/colcon_ws/src
+git clone https://github.com/lagadic/visp_ros.git
+
+cd $HOME/colcon_ws
+colcon build --symlink-install --cmake-args -DVISP_DIR=$VISP_WS/visp-build -DCMAKE_BUILD_TYPE=Release
+```
+
